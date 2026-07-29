@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FarmGuard X | AI Plant Disease Diagnosis & Crop Health Platform</title>
+  <meta name="description" content="Offline-ready AI plant disease diagnosis, symptom detection, organic & chemical treatment recommendations, and crop recovery monitoring.">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#10b981">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- Header -->
+  <header class="app-header">
+    <a href="#" class="brand">
+      <div class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c1 2 2 4.1 2 9 0 5-4 9-10 9z"></path>
+          <path d="M11 20v-5a4 4 0 0 1 4-4h5"></path>
+        </svg>
+      </div>
+      <div class="brand-text">
+        FarmGuard <span style="color: var(--emerald-light);">X</span>
+        <span class="brand-badge">AI 4.2</span>
+      </div>
+    </a>
+
+    <div class="header-controls">
+      <span class="offline-badge" id="offlineStatusBadge">
+        🟢 Offline Ready
+      </span>
+
+      <select class="field-selector" id="fieldSelect">
+        <option value="field_4b">📍 North Sector - Field 4B (Tomatoes)</option>
+        <option value="orchard_east">🍎 East Orchard - Block 12</option>
+        <option value="greenhouse_2">🌿 Greenhouse 2 - Solanaceae</option>
+      </select>
+
+      <div class="quick-stats">
+        <div class="stat-item">
+          <span class="pulse-dot"></span>
+          <span class="stat-label">AI Status:</span>
+          <span class="stat-value">Active</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Accuracy:</span>
+          <span class="stat-value">98.6%</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Alerts:</span>
+          <span class="stat-value" style="color: var(--amber-warning);">1 Action</span>
+        </div>
+      </div>
+
+      <button class="btn btn-outline" id="printReportBtn" title="Export Diagnostic Certificate">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        Export Report
+      </button>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="app-sidebar">
+    <nav>
+      <a href="#scannerCard" class="nav-item active" data-target="scannerCard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 7V5a2 2 0 0 1 2-2h2"></path>
+          <path d="M17 3h2a2 2 0 0 1 2 2v2"></path>
+          <path d="M21 17v2a2 2 0 0 1-2 2h-2"></path>
+          <path d="M7 21H5a2 2 0 0 1-2-2v-2"></path>
+          <rect x="7" y="7" width="10" height="10" rx="2"></rect>
+        </svg>
+        AI Diagnosis
+      </a>
+
+      <a href="#treatmentSection" class="nav-item" data-target="treatmentSection">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        Treatment & Care
+      </a>
+
+      <a href="#calculator" class="nav-item" data-target="calculator">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+          <line x1="8" y1="6" x2="16" y2="6"></line>
+          <line x1="16" y1="14" x2="16" y2="18"></line>
+          <path d="M16 10h.01"></path>
+          <path d="M12 10h.01"></path>
+          <path d="M8 10h.01"></path>
+          <path d="M12 14h.01"></path>
+          <path d="M8 14h.01"></path>
+          <path d="M12 18h.01"></path>
+          <path d="M8 18h.01"></path>
+        </svg>
+        Dosage Calculator
+      </a>
+
+      <a href="#database" class="nav-item" data-target="database">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+        Disease Directory
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="weather-widget-mini">
+        <div class="weather-header">
+          <span>Field Station #4</span>
+          <span>Live</span>
+        </div>
+        <div class="weather-temp">
+          ☀️ 28°C <span style="font-size: 0.85rem; font-weight:400; color:var(--text-muted);">Humidity: 84%</span>
+        </div>
+        <div class="weather-alert-tag">
+          ⚠️ High Blight Humidity Risk
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">
+          Crop Health & Disease Diagnostic Engine
+        </h1>
+        <p class="page-subtitle">Real-time multispectral foliage scan and plant pathology analysis (Offline Engine).</p>
+      </div>
+      <div>
+        <button class="btn btn-primary" id="triggerScanBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          Run AI Neural Scan
+        </button>
+      </div>
+    </div>
+
+    <!-- Dashboard Main Grid -->
+    <div class="dashboard-grid">
+
+      <!-- Scanner Column -->
+      <div class="scanner-column">
+        <div class="glass-card" id="scannerCard">
+          <div class="card-title">
+            <span>Leaf Sample View</span>
+            <span style="font-size: 0.78rem; color: var(--emerald-light); background: rgba(16,185,129,0.1); padding: 4px 8px; border-radius:4px;">
+              Target: Tomato (Solanum lycopersicum)
+            </span>
+          </div>
+
+          <!-- Scanner Display Area -->
+          <div class="scanner-view-container" id="dropZone">
+            <img src="assets/tomato_late_blight.jpg" alt="Tomato Late Blight Leaf" class="leaf-preview-img" id="previewImg">
+            
+            <!-- Animated Scan Line -->
+            <div class="scan-laser-line" id="scanLine"></div>
+            <div class="scan-grid-overlay" id="gridOverlay"></div>
+
+            <!-- Artificial Intelligence Bounding Box Highlight -->
+            <div class="bounding-box" id="boundingBox" style="top: 25%; left: 20%; width: 55%; height: 50%;">
+              <span class="bounding-box-label">Phytophthora infestans (97.4%)</span>
+            </div>
+          </div>
+
+          <!-- Presets Selection -->
+          <div class="preset-section">
+            <div class="preset-title">Test Sample Library:</div>
+            <div class="preset-chips">
+              <button class="chip active" data-preset="tomato_late_blight">
+                🍅 Tomato Late Blight
+              </button>
+              <button class="chip" data-preset="healthy_tomato">
+                🌿 Healthy Tomato Leaf
+              </button>
+              <button class="chip" data-preset="corn_rust">
+                🌽 Corn Common Rust
+              </button>
+              <button class="chip" data-preset="potato_early_blight">
+                🥔 Potato Early Blight
+              </button>
+            </div>
+          </div>
+
+          <div style="margin-top: 16px; font-size: 0.8rem; color: var(--text-muted); text-align: center;">
+            💡 Tip: Click any sample above or drag & drop your own crop leaf photo onto the scanner.
+          </div>
+        </div>
+      </div>
+
+      <!-- Diagnosis Results Column (Matching User Request Exact Schema) -->
+      <div class="results-column">
+        
+        <!-- Primary Prediction Card -->
+        <div class="glass-card diagnosis-hero">
+          
+          <div class="hero-top-bar">
+            <div class="prediction-title-group">
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">
+                AI Primary Prediction
+              </div>
+              <h2 id="predictionTitle">Tomato Late Blight</h2>
+              <div class="prediction-subtitle" id="predictionCategory">
+                ⚠️ High Severity Fungal Pathogen Detected
+              </div>
+            </div>
+
+            <!-- Confidence Gauge -->
+            <div class="confidence-gauge-container">
+              <div class="gauge-wrapper">
+                <svg class="gauge-svg" viewBox="0 0 100 100">
+                  <circle class="gauge-bg" cx="50" cy="50" r="40"></circle>
+                  <circle class="gauge-progress" id="gaugeCircle" cx="50" cy="50" r="40"></circle>
+                </svg>
+                <div class="gauge-text" id="confidenceValue">97.4%</div>
+              </div>
+              <span class="confidence-label">Confidence</span>
+            </div>
+          </div>
+
+          <!-- Key Metrics Grid -->
+          <div class="metrics-row">
+            
+            <!-- Symptoms -->
+            <div class="metric-card">
+              <div class="metric-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                Symptoms
+              </div>
+              <ul class="symptoms-list" id="symptomsList">
+                <li><span class="symptom-tag">• Dark brown spots</span></li>
+                <li><span class="symptom-tag">• Yellow leaf edges</span></li>
+              </ul>
+            </div>
+
+            <!-- Likely Cause -->
+            <div class="metric-card">
+              <div class="metric-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                </svg>
+                Likely Cause
+              </div>
+              <div class="metric-value" id="likelyCauseText" style="font-style: italic; color: #a7f3d0;">
+                Phytophthora infestans
+              </div>
+              <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
+                Water mold / Oomycete pathogen spread via damp spores.
+              </div>
+            </div>
+
+            <!-- Precautions -->
+            <div class="metric-card">
+              <div class="metric-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                Precautions
+              </div>
+              <div class="metric-value" id="precautionsText" style="color: var(--amber-warning); font-size: 0.98rem;">
+                Avoid watering leaves
+              </div>
+              <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
+                Use drip irrigation to keep foliage dry and suppress sporulation.
+              </div>
+            </div>
+
+            <!-- Expected Recovery -->
+            <div class="metric-card">
+              <div class="metric-header">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                Expected Recovery
+              </div>
+              <div class="metric-value" id="expectedRecoveryText" style="color: var(--emerald-light);">
+                7–14 days
+              </div>
+              <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
+                With strict adherence to treatment schedule.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Treatment Recommendations & Log Module -->
+          <div class="treatment-section" id="treatmentSection">
+            <div class="card-title" style="margin-bottom: 12px;">
+              <span>Treatment Recommendations & Plan</span>
+              <button class="btn btn-outline" id="openLogModalBtn" style="padding: 6px 14px; font-size: 0.82rem;">
+                ➕ Log Spray Application
+              </button>
+            </div>
+
+            <div class="treatment-tabs">
+              <button class="tab-btn active" data-treatment-tab="organic">
+                🌿 Organic Treatment
+              </button>
+              <button class="tab-btn" data-treatment-tab="chemical">
+                🧪 Chemical Treatment
+              </button>
+              <button class="tab-btn" data-treatment-tab="biological">
+                🦠 Bio & Cultural Management
+              </button>
+            </div>
+
+            <!-- Organic Treatment -->
+            <div class="treatment-content active" id="tab-organic">
+              <div class="treatment-box">
+                <div class="treatment-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c1 2 2 4.1 2 9 0 5-4 9-10 9z"></path>
+                  </svg>
+                </div>
+                <div style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <div class="treatment-title" id="organicTitle">Neem oil spray</div>
+                    <span class="brand-badge" style="background: rgba(16,185,129,0.2); color: var(--emerald-light);">Organic Certified</span>
+                  </div>
+                  <div class="treatment-desc" id="organicDesc">
+                    Apply cold-pressed Neem Oil emulsion (5ml per 1L of water with 1ml liquid soap). Spray thoroughly during early morning or evening hours every 3 days to suffocate spores and reduce fungal spread.
+                  </div>
+                  <div style="margin-top: 10px; display:flex; gap:14px; font-size:0.8rem; color:var(--text-muted); flex-wrap:wrap;">
+                    <span><strong>Frequency:</strong> Every 3 Days</span>
+                    <span>•</span>
+                    <span><strong>Dilution:</strong> 5ml / 1L Water</span>
+                    <span>•</span>
+                    <span><strong>Safety Rating:</strong> High (Non-toxic to bees)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chemical Treatment -->
+            <div class="treatment-content" id="tab-chemical">
+              <div class="treatment-box" style="border-left-color: var(--cyan-info);">
+                <div class="treatment-icon" style="background: rgba(6, 182, 212, 0.15);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--cyan-info);">
+                    <path d="M10 2v2H6v2h12V4h-4V2z"></path>
+                    <path d="M19 9l-1.5 9A3 3 0 0 1 14.5 21h-5a3 3 0 0 1-3-3L5 9h14z"></path>
+                  </svg>
+                </div>
+                <div style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <div class="treatment-title" id="chemicalTitle">Copper fungicide</div>
+                    <span class="brand-badge" style="background: rgba(6, 182, 212, 0.2); color: var(--cyan-info);">Fast Acting</span>
+                  </div>
+                  <div class="treatment-desc" id="chemicalDesc">
+                    Apply Copper Hydroxide or Copper Oxychloride spray (2g per 1L water) every 5–7 days. Copper acts as a protective barrier on leaf tissue preventing germ tube penetration. Observe a 1-day harvest interval after application.
+                  </div>
+                  <div style="margin-top: 10px; display:flex; gap:14px; font-size:0.8rem; color:var(--text-muted); flex-wrap:wrap;">
+                    <span><strong>Frequency:</strong> Every 5–7 Days</span>
+                    <span>•</span>
+                    <span><strong>Dosage:</strong> 2g / 1L Water</span>
+                    <span>•</span>
+                    <span><strong>Harvest Delay:</strong> 24 Hours</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Biological & Cultural Tab -->
+            <div class="treatment-content" id="tab-biological">
+              <div class="treatment-box" style="border-left-color: var(--purple-magic);">
+                <div class="treatment-icon" style="background: rgba(139, 92, 246, 0.15);">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--purple-magic);">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"></path>
+                  </svg>
+                </div>
+                <div style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <div class="treatment-title" id="bioTitle">Trichoderma Bio-Control & Canopy Pruning</div>
+                    <span class="brand-badge" style="background: rgba(139, 92, 246, 0.2); color: var(--purple-magic);">Eco Restoration</span>
+                  </div>
+                  <div class="treatment-desc" id="bioDesc">
+                    Perform soil root drenching with Trichoderma harzianum bio-fungicide to colonize roots. Prune bottom 30cm of lower leaves with dark brown spots to stop soil-splash spore inoculation.
+                  </div>
+                  <div style="margin-top: 10px; display:flex; gap:14px; font-size:0.8rem; color:var(--text-muted); flex-wrap:wrap;">
+                    <span><strong>Application:</strong> Root Drench & Leaf Pruning</span>
+                    <span>•</span>
+                    <span><strong>Effect:</strong> Root Shielding</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Field Spray History Log -->
+            <div style="margin-top: 20px; background: var(--bg-card); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-secondary);">📋 Recent Field Spray History Log</span>
+                <span style="font-size: 0.78rem; color: var(--emerald-light);" id="logEntryCount">2 Recorded Applications</span>
+              </div>
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+                <thead>
+                  <tr style="border-bottom: 1px solid var(--border-subtle); color: var(--text-muted); text-align: left;">
+                    <th style="padding: 6px;">Date & Time</th>
+                    <th style="padding: 6px;">Treatment Applied</th>
+                    <th style="padding: 6px;">Target Field</th>
+                    <th style="padding: 6px;">Volume</th>
+                    <th style="padding: 6px;">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="sprayLogTableBody">
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                    <td style="padding: 8px;">2026-07-29 (Today)</td>
+                    <td style="padding: 8px; color: var(--emerald-light); font-weight:600;">Neem Oil Spray (15ml/3L)</td>
+                    <td style="padding: 8px;">Field 4B</td>
+                    <td style="padding: 8px;">15.0 L Mix</td>
+                    <td style="padding: 8px;"><span class="symptom-tag" style="background:rgba(16,185,129,0.15); color:var(--emerald-light); border-color:var(--border-accent);">Completed</span></td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                    <td style="padding: 8px;">2026-07-26 (3 Days Ago)</td>
+                    <td style="padding: 8px; color: var(--cyan-info); font-weight:600;">Copper Fungicide (2g/L)</td>
+                    <td style="padding: 8px;">Field 4B</td>
+                    <td style="padding: 8px;">25.0 L Mix</td>
+                    <td style="padding: 8px;"><span class="symptom-tag" style="background:rgba(16,185,129,0.15); color:var(--emerald-light); border-color:var(--border-accent);">Completed</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <!-- 7-14 Day Recovery Roadmap & Progress Tracker -->
+          <div class="recovery-tracker-card" id="recoveryTracker">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-weight: 700; font-size: 0.95rem; font-family: var(--font-heading);">
+                7–14 Day Care Roadmap & Daily Action Plan
+              </span>
+              <span style="font-size: 0.8rem; color: var(--emerald-light); font-weight: 600;">
+                Current Phase: Stage 1 (Days 1–3)
+              </span>
+            </div>
+
+            <div class="timeline-progress-bar">
+              <div class="timeline-progress-fill" style="width: 25%;"></div>
+            </div>
+
+            <div class="timeline-steps">
+              <div class="step-card active">
+                <div class="step-day">Days 1–3</div>
+                <div>Prune infected lower foliage & apply organic Neem spray.</div>
+              </div>
+              <div class="step-card">
+                <div class="step-day">Days 4–7</div>
+                <div>Apply Copper Fungicide barrier spray. Keep leaves completely dry.</div>
+              </div>
+              <div class="step-card">
+                <div class="step-day">Days 8–10</div>
+                <div>Inspect for new brown lesions or yellow margins.</div>
+              </div>
+              <div class="step-card">
+                <div class="step-day">Days 11–14</div>
+                <div>Healthy new growth evaluation & final preventative spray.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Treatment Action Checklist & Spray Calculator Section -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px;" id="careChecklist">
+      
+      <!-- Interactive Checklist -->
+      <div class="glass-card">
+        <div class="card-title">
+          <span>Field Action Checklist</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);" id="checklistCount">2/5 Done</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 12px;">
+          <label style="display: flex; align-items: center; gap: 12px; background: var(--bg-surface); padding: 12px; border-radius: var(--radius-md); cursor: pointer;">
+            <input type="checkbox" checked style="width: 18px; height: 18px; accent-color: var(--emerald-primary);" class="task-check">
+            <span style="font-size: 0.9rem;">Immediately isolate affected tomato plants in Field 4B</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 12px; background: var(--bg-surface); padding: 12px; border-radius: var(--radius-md); cursor: pointer;">
+            <input type="checkbox" checked style="width: 18px; height: 18px; accent-color: var(--emerald-primary);" class="task-check">
+            <span style="font-size: 0.9rem;">Prune leaves showing dark brown spots & yellow edges</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 12px; background: var(--bg-surface); padding: 12px; border-radius: var(--radius-md); cursor: pointer;">
+            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--emerald-primary);" class="task-check">
+            <span style="font-size: 0.9rem;">Switch overhead sprinklers to drip irrigation system</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 12px; background: var(--bg-surface); padding: 12px; border-radius: var(--radius-md); cursor: pointer;">
+            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--emerald-primary);" class="task-check">
+            <span style="font-size: 0.9rem;">Prepare Neem Oil organic spray solution (15ml / 3L)</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 12px; background: var(--bg-surface); padding: 12px; border-radius: var(--radius-md); cursor: pointer;">
+            <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--emerald-primary);" class="task-check">
+            <span style="font-size: 0.9rem;">Apply Copper Fungicide barrier spray if weather stays humid</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Spray & Dosage Calculator -->
+      <div class="glass-card" id="calculator">
+        <div class="card-title">
+          <span>Chemical & Treatment Dosage Calculator</span>
+          <span style="font-size: 0.8rem; color: var(--emerald-light);">Precision Ag Tool</span>
+        </div>
+
+        <div class="calculator-grid">
+          <div class="calc-input-group">
+            <label for="landArea">Field Area Size</label>
+            <input type="number" id="landArea" value="2.5" step="0.5" min="0.1">
+          </div>
+
+          <div class="calc-input-group">
+            <label for="areaUnit">Unit</label>
+            <select id="areaUnit">
+              <option value="acres">Acres</option>
+              <option value="hectares">Hectares</option>
+              <option value="sqm">Square Meters</option>
+            </select>
+          </div>
+
+          <div class="calc-input-group">
+            <label for="treatmentType">Selected Treatment</label>
+            <select id="treatmentType">
+              <option value="neem">Neem Oil Spray (Organic)</option>
+              <option value="copper">Copper Fungicide (Chemical)</option>
+            </select>
+          </div>
+
+          <div class="calc-result-box">
+            <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">
+              Required Volume
+            </div>
+            <div class="calc-result-number" id="calcOutput">1.50 Liters</div>
+            <div style="font-size: 0.82rem; color: var(--text-secondary);" id="waterMixOutput">
+              Mix with 300 Liters of water
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Disease Database / Directory Table -->
+    <div class="glass-card" style="margin-top: 28px;" id="database">
+      <div class="card-title">
+        <span>Plant Disease & Pathology Library</span>
+        <input type="text" id="searchDatabase" placeholder="Search by crop, disease, or pathogen..." style="background: var(--bg-surface); border: 1px solid var(--border-subtle); padding: 6px 12px; border-radius: 6px; color: #fff; font-size: 0.85rem; width: 260px;">
+      </div>
+
+      <table style="width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.9rem;">
+        <thead>
+          <tr style="border-bottom: 1px solid var(--border-subtle); text-align: left; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">
+            <th style="padding: 10px;">Crop</th>
+            <th style="padding: 10px;">Disease Name</th>
+            <th style="padding: 10px;">Pathogen / Cause</th>
+            <th style="padding: 10px;">Key Symptoms</th>
+            <th style="padding: 10px;">Organic Solution</th>
+            <th style="padding: 10px;">Chemical Solution</th>
+          </tr>
+        </thead>
+        <tbody id="directoryTableBody">
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(16,185,129,0.05);">
+            <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
+            <td style="padding: 12px; font-weight: 700; color: var(--rose-danger);">Tomato Late Blight</td>
+            <td style="padding: 12px; font-style: italic;">Phytophthora infestans</td>
+            <td style="padding: 12px;">Dark brown spots, Yellow leaf edges</td>
+            <td style="padding: 12px; color: var(--emerald-light);">Neem oil spray</td>
+            <td style="padding: 12px; color: var(--cyan-info);">Copper fungicide</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <td style="padding: 12px; font-weight: 600; color: #fff;">🥔 Potato</td>
+            <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Potato Early Blight</td>
+            <td style="padding: 12px; font-style: italic;">Alternaria solani</td>
+            <td style="padding: 12px;">Concentric ring spots, lower leaf yellowing</td>
+            <td style="padding: 12px;">Compost tea spray</td>
+            <td style="padding: 12px;">Mancozeb 75% WP</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <td style="padding: 12px; font-weight: 600; color: #fff;">🌽 Corn</td>
+            <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Corn Common Rust</td>
+            <td style="padding: 12px; font-style: italic;">Puccinia sorghi</td>
+            <td style="padding: 12px;">Reddish-brown pustules on leaves</td>
+            <td style="padding: 12px;">Sulfur dust</td>
+            <td style="padding: 12px;">Azoxystrobin</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <td style="padding: 12px; font-weight: 600; color: #fff;">🍎 Apple</td>
+            <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Apple Scab</td>
+            <td style="padding: 12px; font-style: italic;">Venturia inaequalis</td>
+            <td style="padding: 12px;">Olive-green velvet leaf lesions</td>
+            <td style="padding: 12px;">Potassium bicarbonate</td>
+            <td style="padding: 12px;">Captan fungicide</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+</div>
+
+<!-- Spray Log Modal -->
+<div id="logModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: 1000; align-items: center; justify-content: center;">
+  <div class="glass-card" style="width: 480px; max-width: 90%; background: var(--bg-card-solid); border: 1px solid var(--border-glow);">
+    <div class="card-title">
+      <span>Log Field Spray Application</span>
+      <button id="closeLogModalBtn" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem;">✕</button>
+    </div>
+    <form id="sprayLogForm" style="display: flex; flex-direction: column; gap: 14px; margin-top: 14px;">
+      <div class="calc-input-group">
+        <label for="logTreatmentProduct">Treatment Product</label>
+        <select id="logTreatmentProduct">
+          <option value="Neem Oil Spray (Organic)">Neem Oil Spray (Organic)</option>
+          <option value="Copper Fungicide (Chemical)">Copper Fungicide (Chemical)</option>
+          <option value="Trichoderma Bio-Control">Trichoderma Bio-Control</option>
+          <option value="Sulfur Dusting">Sulfur Dusting</option>
+        </select>
+      </div>
+      <div class="calc-input-group">
+        <label for="logFieldBlock">Target Field Block</label>
+        <input type="text" id="logFieldBlock" value="North Sector - Field 4B" required>
+      </div>
+      <div class="calc-input-group">
+        <label for="logVolume">Volume / Quantity Applied</label>
+        <input type="text" id="logVolume" value="20.0 Liters Mix" required>
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+        <button type="button" class="btn btn-outline" id="cancelLogBtn">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save to Log</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- JavaScript Core -->
+<script src="app.js"></script>
+
+</body>
+</html>

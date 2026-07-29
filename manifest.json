@@ -1,0 +1,21 @@
+{
+  "name": "FarmGuard X - AI Crop Pathology & Health",
+  "short_name": "FarmGuard X",
+  "description": "Offline-first AI plant disease diagnosis and crop care platform.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#070b09",
+  "theme_color": "#10b981",
+  "icons": [
+    {
+      "src": "assets/healthy_tomato.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "assets/tomato_late_blight.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
