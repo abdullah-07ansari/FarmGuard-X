@@ -1,0 +1,90 @@
+{
+  "Tomato___Healthy": {
+    "crop": "Tomato",
+    "disease": "Healthy",
+    "symptoms": ["No lesion spots detected", "Vibrant green chlorosis test passed"],
+    "cause": "Optimal nutrient balance and steady solar radiation",
+    "severity": "Low",
+    "organic_treatment": "Foliar seaweed kelp extract every 14 days for root immunity.",
+    "chemical_treatment": "No chemical action needed.",
+    "preventive_measures": ["Maintain drip irrigation", "Inspect foliage weekly"],
+    "recovery_time": "Optimal (0 days)"
+  },
+  "Tomato___Early_blight": {
+    "crop": "Tomato",
+    "disease": "Early Blight",
+    "symptoms": ["Concentric dark brown target-like spots", "Lower leaf margins yellowing"],
+    "cause": "Alternaria solani (Fungal pathogen)",
+    "severity": "Medium",
+    "organic_treatment": "Spray aerated compost tea or copper soap emulsion every 7 days.",
+    "chemical_treatment": "Apply Chlorothalonil or Mancozeb 75% WP at 2g/L water.",
+    "preventive_measures": ["Stake tomato plants", "Prune lower leaves touching soil", "Rotate crops annually"],
+    "recovery_time": "7–14 days"
+  },
+  "Tomato___Late_blight": {
+    "crop": "Tomato",
+    "disease": "Late Blight",
+    "symptoms": ["Dark brown water-soaked spots", "Yellow leaf edges", "White fungal mold under leaf"],
+    "cause": "Phytophthora infestans (Water mold / Oomycete pathogen)",
+    "severity": "High",
+    "organic_treatment": "Apply cold-pressed Neem oil spray (15ml / 3L water) every 3 days.",
+    "chemical_treatment": "Apply Copper Hydroxide or Copper Oxychloride barrier spray (2g / 1L water).",
+    "preventive_measures": ["Avoid overhead leaf watering", "Isolate infected plants", "Destroy crop residue"],
+    "recovery_time": "7–14 days"
+  },
+  "Potato___Healthy": {
+    "crop": "Potato",
+    "disease": "Healthy",
+    "symptoms": ["Vigorous dark green leaves", "No lesion spots"],
+    "cause": "Balanced soil moisture and rich organic compost",
+    "severity": "Low",
+    "organic_treatment": "Apply straw mulch around hills to keep soil cool and moist.",
+    "chemical_treatment": "No chemical action needed.",
+    "preventive_measures": ["Use certified disease-free seed potatoes", "Ensure proper drainage"],
+    "recovery_time": "Optimal (0 days)"
+  },
+  "Potato___Early_blight": {
+    "crop": "Potato",
+    "disease": "Early Blight",
+    "symptoms": ["Small brown-black spots with concentric rings", "Leaf wilting"],
+    "cause": "Alternaria solani",
+    "severity": "Medium",
+    "organic_treatment": "Spray copper-based organic liquid fungicide every 7 days.",
+    "chemical_treatment": "Apply Azoxystrobin or Difenoconazole spray according to label dose.",
+    "preventive_measures": ["Maintain 3-year crop rotation", "Avoid nitrogen deficiency"],
+    "recovery_time": "10–14 days"
+  },
+  "Potato___Late_blight": {
+    "crop": "Potato",
+    "disease": "Late Blight",
+    "symptoms": ["Large purplish-brown dark lesions", "Rapid leaf drop and stem rotting"],
+    "cause": "Phytophthora infestans",
+    "severity": "High",
+    "organic_treatment": "Root drench with Trichoderma harzianum and foliar Neem oil spray.",
+    "chemical_treatment": "Apply Metalaxyl + Mancozeb combination spray immediately.",
+    "preventive_measures": ["Destroy volunteer potatoes", "Avoid high canopy humidity"],
+    "recovery_time": "7–14 days"
+  },
+  "Pepper__bell___Healthy": {
+    "crop": "Bell Pepper",
+    "disease": "Healthy",
+    "symptoms": ["Smooth foliage", "Healthy green canopy"],
+    "cause": "Good canopy aeration and balanced calcium levels",
+    "severity": "Low",
+    "organic_treatment": "Apply organic liquid fish emulsion for steady leaf growth.",
+    "chemical_treatment": "No chemical action needed.",
+    "preventive_measures": ["Mulch soil to regulate temperature", "Maintain steady watering"],
+    "recovery_time": "Optimal (0 days)"
+  },
+  "Pepper__bell___Bacterial_spot": {
+    "crop": "Bell Pepper",
+    "disease": "Bacterial Spot",
+    "symptoms": ["Small water-soaked lesions turning dark brown", "Yellow halos", "Severe leaf drop"],
+    "cause": "Xanthomonas euvesicatoria (Bacterial pathogen)",
+    "severity": "High",
+    "organic_treatment": "Apply fixed copper bactericide combined with liquid soap solution.",
+    "chemical_treatment": "Apply Copper Hydroxide mixed with Mancozeb to prevent resistance.",
+    "preventive_measures": ["Use certified disease-free seed", "Avoid overhead irrigation", "Sanitize tools"],
+    "recovery_time": "10–21 days"
+  }
+}
