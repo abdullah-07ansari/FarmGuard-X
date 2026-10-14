@@ -12,3 +12,32 @@ node_modules/
 .env
 .DS_Store
 *.log
+
+# FarmGuard X ML pipeline
+farmguard_ai/data/01_raw/
+farmguard_ai/data/02_processed/
+farmguard_ai/data/04_experiments/
+farmguard_ai/**/__pycache__/
+farmguard_ai/**/*.pyc
+farmguard_ai/.venv/
+farmguard_ai/venv/
+farmguard_ai/*.h5
+farmguard_ai/*.keras
+farmguard_ai/*.tflite
+farmguard_ai/*.ckpt
+farmguard_ai/*.pb
+
+
+
+# Python-generated artifacts
+**/__pycache__/
+*.py[cod]
+
+# Local databases and uploaded scans
+backend/*.db
+backend/uploads/*
+
+# Ignore generated split artifacts, but keep the portable manifest
+farmguard_ai/data/03_splits/*
+!farmguard_ai/data/03_splits/
+!farmguard_ai/data/03_splits/split_manifest.csv

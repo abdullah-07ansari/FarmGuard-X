@@ -1,0 +1,48 @@
+# FarmGuard X - Sprint 1 Baseline Experiment Configuration
+
+experiment_name: "mobilenet_v2_int8_v1_baseline"
+seed: 42
+
+# --- FIXED ARCHITECTURAL INVARIANTS (From Technical Spec) ---
+invariants:
+  image_size: [224, 224]
+  channels: 3
+  num_classes: 8
+  normalization: "mobilenet_v2" # Scale to [-1.0, 1.0]
+  labels:
+    0: "Potato___Early_blight"
+    1: "Potato___Late_blight"
+    2: "Potato___healthy"
+    3: "Tomato___Bacterial_spot"
+    4: "Tomato___Early_blight"
+    5: "Tomato___Late_blight"
+    6: "Tomato___Yellow_Leaf_Curl_Virus"
+    7: "Tomato___healthy"
+
+# --- CONFIGURABLE DATASET PIPELINE PARAMETERS ---
+data:
+  raw_dir: "farmguard_ai/data/01_raw"
+  processed_dir: "farmguard_ai/data/02_processed"
+  splits_dir: "farmguard_ai/data/03_splits"
+  experiments_dir: "farmguard_ai/data/04_experiments"
+  dedup_hamming_threshold: 6
+  split_ratios: [0.70, 0.15, 0.15] # Train (70%), Val (15%), Test (15%)
+
+training:
+  batch_size: 32
+  phase1_epochs: 15
+  phase1_lr: 0.001
+  phase2_epochs: 30
+  phase2_lr: 0.00001
+  dropout_rate: 0.3
+  early_stopping_patience: 5
+  class_weight_method: "inverse_frequency"
+
+calibration:
+  candidate_taus: [0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80]
+  initial_tau_candidate: 0.65
+
+quantization:
+  quantize_int8: true
+  representative_sample_count: 200
+  target_max_f1_drop: 0.01
