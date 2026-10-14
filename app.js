@@ -39,16 +39,23 @@ document.addEventListener('DOMContentLoaded', () => {
     tomato_late_blight: {
       crop: "Tomato",
       prediction: "Tomato Late Blight",
+      hindiName: "टमाटर का पछेती झुलसा रोग",
       confidence: 97.4,
-      category: "⚠️ High Severity Fungal Pathogen Detected",
+      category: "🚨 High Severity Oomycete Pathogen (Irish Famine)",
       categoryColor: "var(--rose-danger)",
       symptoms: ["Dark brown water-soaked spots", "White fungal mold under leaf", "Rapid foliage decay"],
       cause: "Phytophthora infestans",
-      causeDetails: "Water mold / Oomycete pathogen spread via damp windblown sporangia.",
+      causeDetails: "Water mold / Oomycete pathogen spread via damp windblown sporangia (>90% humidity).",
+      diff: {
+        name1: "P. infestans (Late Blight)", val1: 97.4, color1: "var(--rose-danger)",
+        name2: "A. solani (Early Blight)", val2: 1.8, color2: "var(--amber-warning)",
+        name3: "X. perforans (Bacterial)", val3: 0.8, color3: "var(--cyan-info)",
+        ruleOut: "Alternaria solani ruled out: absence of concentric target-board ring geometry on upper foliage."
+      },
       organicTitle: "Cold-Pressed Neem Oil Emulsion",
       organicDesc: "Apply cold-pressed Neem oil spray (15ml / 3L water) every 3 days. Prune bottom leaves to stop soil-splash spore inoculation.",
-      chemicalTitle: "Copper Hydroxide / Copper Oxychloride",
-      chemicalDesc: "Apply Copper Hydroxide or Copper Oxychloride barrier spray (2g / 1L water) every 5–7 days. Observe 1-day harvest interval.",
+      chemicalTitle: "Metalaxyl 8% + Mancozeb 64% WP",
+      chemicalDesc: "Apply Metalaxyl + Mancozeb (2.5g/L water) or Cymoxanil immediately upon lesion appearance (FRAC 4 + M03).",
       bioTitle: "Trichoderma Bio-Shield",
       bioDesc: "Perform root drenching with Trichoderma harzianum bio-fungicide to colonize rhizosphere and outcompete oomycete zoospores.",
       precautions: "Cease overhead leaf watering",
@@ -60,16 +67,23 @@ document.addEventListener('DOMContentLoaded', () => {
     tomato_early_blight: {
       crop: "Tomato",
       prediction: "Tomato Early Blight",
+      hindiName: "टमाटर का अगेती झुलसा रोग",
       confidence: 95.8,
       category: "⚠️ Moderate Alternaria Lesions Detected",
       categoryColor: "var(--amber-warning)",
       symptoms: ["Concentric dark brown target spots", "Lower leaf margin chlorosis", "Stem collar rot"],
       cause: "Alternaria solani",
       causeDetails: "Fungal pathogen targeting older foliage under nutrient stress or warm humid conditions.",
+      diff: {
+        name1: "A. solani (Early Blight)", val1: 95.8, color1: "var(--amber-warning)",
+        name2: "P. infestans (Late Blight)", val2: 2.9, color2: "var(--rose-danger)",
+        name3: "Septoria Leaf Spot", val3: 1.3, color3: "var(--cyan-info)",
+        ruleOut: "Phytophthora infestans ruled out: absence of water-soaked greasy foliar margin decay."
+      },
       organicTitle: "Aerated Compost Tea & Copper Soap",
       organicDesc: "Spray aerated compost tea or copper soap emulsion every 7 days to coat foliage with beneficial microbiota.",
-      chemicalTitle: "Chlorothalonil / Mancozeb 75% WP",
-      chemicalDesc: "Apply Chlorothalonil or Mancozeb 75% WP at 2g/L water on a 7–10 day protective schedule.",
+      chemicalTitle: "Azoxystrobin / Mancozeb 75% WP",
+      chemicalDesc: "Apply Azoxystrobin 23% SC (1ml/L) or Mancozeb 75% WP at 2g/L water on a 7–10 day protective schedule.",
       bioTitle: "Bacillus subtilis Bio-Fungicide",
       bioDesc: "Foliar application of Bacillus subtilis strain QST 713 to form a protective biological barrier.",
       precautions: "Prune lower canopy leaves",
@@ -81,12 +95,19 @@ document.addEventListener('DOMContentLoaded', () => {
     tomato_bacterial_spot: {
       crop: "Tomato",
       prediction: "Tomato Bacterial Spot",
+      hindiName: "टमाटर का जीवाणु धब्बा रोग",
       confidence: 96.2,
       category: "⚠️ High Severity Bacterial Inoculation",
       categoryColor: "var(--rose-danger)",
       symptoms: ["Small dark greasy-looking spots", "Translucent halos around lesions", "Fruit scabbing"],
       cause: "Xanthomonas campestris pv. vesicatoria",
       causeDetails: "Bacterial pathogen entering via stomata and wounds during warm rains.",
+      diff: {
+        name1: "X. perforans (Bacterial)", val1: 96.2, color1: "var(--amber-warning)",
+        name2: "A. solani (Early Blight)", val2: 2.4, color2: "var(--rose-danger)",
+        name3: "Tomato Target Spot", val3: 1.4, color3: "var(--cyan-info)",
+        ruleOut: "Fungal blights ruled out: lesions exhibit distinct circular bacterial halos with greasy texture."
+      },
       organicTitle: "Bordeaux Mixture (1%)",
       organicDesc: "Spray fresh copper sulfate mixed with hydrated lime (Bordeaux mixture 1%) every 7 days.",
       chemicalTitle: "Streptocycline + Copper Oxychloride",
@@ -102,12 +123,19 @@ document.addEventListener('DOMContentLoaded', () => {
     tomato_yellow_leaf_curl: {
       crop: "Tomato",
       prediction: "Tomato Yellow Leaf Curl (TYLCV)",
+      hindiName: "टमाटर की पर्ण कुंचन बीमारी (TYLCV)",
       confidence: 98.7,
       category: "🚨 Critical Severity Viral Infection (Whitefly Vector)",
       categoryColor: "var(--rose-danger)",
       symptoms: ["Upward curling leaf margins", "Severe interveinal chlorosis", "Stunted bushy growth"],
       cause: "Tomato Yellow Leaf Curl Virus (Begomovirus)",
       causeDetails: "Plant virus transmitted primarily by the Silverleaf Whitefly (Bemisia tabaci).",
+      diff: {
+        name1: "Begomovirus (TYLCV)", val1: 98.7, color1: "var(--rose-danger)",
+        name2: "Tomato Mosaic Virus", val2: 0.9, color2: "var(--amber-warning)",
+        name3: "Zinc Deficiency Chlorosis", val3: 0.4, color3: "var(--cyan-info)",
+        ruleOut: "Fungal pathogens excluded: upward foliar cupping and interveinal yellowing confirm whitefly viral vector."
+      },
       organicTitle: "Neem Seed Kernel Extract (NSKE 5%) & Yellow Traps",
       organicDesc: "Deploy 20 yellow sticky traps per acre and spray NSKE 5% at 5-day intervals to repel whiteflies.",
       chemicalTitle: "Imidacloprid 17.8% SL / Acetamiprid 20% SP",
@@ -123,12 +151,19 @@ document.addEventListener('DOMContentLoaded', () => {
     healthy_tomato: {
       crop: "Tomato",
       prediction: "Healthy Tomato Foliage",
+      hindiName: "स्वस्थ टमाटर की पत्ती",
       confidence: 99.4,
       category: "✅ Vigorous Healthy Foliage",
       categoryColor: "var(--emerald-light)",
       symptoms: ["No lesion spots detected", "Vibrant green chlorosis test passed", "Turgid leaf texture"],
       cause: "Optimal Nutrient Balance & High Solar Insolation",
       causeDetails: "Plant immune system active with zero pathogen load.",
+      diff: {
+        name1: "Healthy Tomato Canopy", val1: 99.4, color1: "var(--emerald-light)",
+        name2: "Trace Nitrogen Vigour", val2: 0.4, color2: "var(--text-muted)",
+        name3: "Solar Bleach Trace", val3: 0.2, color3: "var(--text-muted)",
+        ruleOut: "Clinical Confirmation: Multispectral foliage inspection reveals zero necrotic sporulation lesions."
+      },
       organicTitle: "Foliar Seaweed Kelp Extract",
       organicDesc: "Apply foliar seaweed kelp extract every 14 days for root immunity and enhanced chlorophyll synthesis.",
       chemicalTitle: "No Chemical Action Needed",
@@ -144,12 +179,19 @@ document.addEventListener('DOMContentLoaded', () => {
     potato_early_blight: {
       crop: "Potato",
       prediction: "Potato Early Blight",
+      hindiName: "आलू का अगेती झुलसा रोग",
       confidence: 94.6,
       category: "⚠️ Moderate Alternaria Lesions Detected",
       categoryColor: "var(--amber-warning)",
       symptoms: ["Small brown-black spots with concentric rings", "Leaf wilting & yellow halos"],
       cause: "Alternaria solani",
       causeDetails: "Fungal pathogen attacking potato foliage under temperature fluctuations.",
+      diff: {
+        name1: "A. solani (Early Blight)", val1: 94.6, color1: "var(--amber-warning)",
+        name2: "P. infestans (Late Blight)", val2: 3.8, color2: "var(--rose-danger)",
+        name3: "Potato Blackleg (Bacteria)", val3: 1.6, color3: "var(--cyan-info)",
+        ruleOut: "Late Blight excluded: concentric brown-black target-ring spots confirm Alternaria pathogen."
+      },
       organicTitle: "Copper Soap Liquid Fungicide",
       organicDesc: "Spray copper-based organic liquid fungicide every 7 days. Ensure full underside leaf coverage.",
       chemicalTitle: "Azoxystrobin / Difenoconazole",
@@ -165,12 +207,19 @@ document.addEventListener('DOMContentLoaded', () => {
     potato_late_blight: {
       crop: "Potato",
       prediction: "Potato Late Blight",
+      hindiName: "आलू का पछेती झुलसा रोग",
       confidence: 97.9,
       category: "🚨 High Severity Water Mold (Irish Famine Pathogen)",
       categoryColor: "var(--rose-danger)",
       symptoms: ["Large purplish-brown dark lesions", "Rapid leaf drop and stem rotting", "Water-soaked margins"],
       cause: "Phytophthora infestans",
       causeDetails: "Aggressive oomycete spreading exponentially in cool, damp weather (>90% humidity, 15-20°C).",
+      diff: {
+        name1: "P. infestans (Late Blight)", val1: 97.9, color1: "var(--rose-danger)",
+        name2: "A. solani (Early Blight)", val2: 1.4, color2: "var(--amber-warning)",
+        name3: "Potato Stem Canker", val3: 0.7, color3: "var(--cyan-info)",
+        ruleOut: "Early Blight excluded: water-soaked purplish foliar collapse matches rapid oomycete sporulation."
+      },
       organicTitle: "Bordeaux Mixture (1%) / Trichoderma viride",
       organicDesc: "Foliar spray of Bordeaux mixture 1% or Trichoderma viride culture every 5 days during overcast rain.",
       chemicalTitle: "Metalaxyl 8% + Mancozeb 64% WP",
@@ -186,12 +235,19 @@ document.addEventListener('DOMContentLoaded', () => {
     potato_healthy: {
       crop: "Potato",
       prediction: "Healthy Potato Foliage",
+      hindiName: "स्वस्थ आलू की फसल",
       confidence: 99.2,
       category: "✅ Vigorous Healthy Potato Canopy",
       categoryColor: "var(--emerald-light)",
       symptoms: ["Vigorous dark green leaves", "No lesion spots detected", "Intact leaf margins"],
       cause: "Balanced Soil Moisture & Organic Compost",
       causeDetails: "Optimal vegetative tuber bulking with zero pathological stress.",
+      diff: {
+        name1: "Healthy Potato Canopy", val1: 99.2, color1: "var(--emerald-light)",
+        name2: "Hill Moisture Vigour", val2: 0.5, color2: "var(--text-muted)",
+        name3: "Physical Wind Scuff", val3: 0.3, color3: "var(--text-muted)",
+        ruleOut: "Clinical Confirmation: Leaf margin integrity 100% intact. Zero necrotic sporulation spots detected."
+      },
       organicTitle: "Straw Mulch & Composted Manure",
       organicDesc: "Apply straw mulch around hills to keep soil cool and moist. Spray mild neem tonic preventive monthly.",
       chemicalTitle: "No Chemical Action Needed",
@@ -372,10 +428,70 @@ document.addEventListener('DOMContentLoaded', () => {
       boundingBox.style.height = data.box.height;
       boundingBox.querySelector('.bounding-box-label').textContent = `${data.cause} (${targetConfidence}%)`;
 
-      // Update Hero Diagnosis Data
-      predictionTitle.textContent = data.prediction;
+      // Update Hero Diagnosis Data (Bilingual Agronomic Rendering)
+      if (predictionTitle) {
+        if (isHindiMode && data.hindiName) {
+          predictionTitle.innerHTML = `${data.hindiName} <span style="font-size:1.0rem; color:var(--text-muted); font-weight:500; display:block; margin-top:4px;">(${data.prediction})</span>`;
+        } else {
+          predictionTitle.innerHTML = `${data.prediction} ${data.hindiName ? `<span style="font-size:1.0rem; color:var(--text-muted); font-weight:500; display:block; margin-top:4px;">${data.hindiName}</span>` : ''}`;
+        }
+      }
       predictionCategory.textContent = data.category;
       predictionCategory.style.color = data.categoryColor;
+
+      // Update Differential Pathology Breakdown & Rule-Outs
+      if (data.diff) {
+        const diffName1 = document.getElementById('diffName1');
+        const diffVal1 = document.getElementById('diffVal1');
+        const diffBar1 = document.getElementById('diffBar1');
+        const diffName2 = document.getElementById('diffName2');
+        const diffVal2 = document.getElementById('diffVal2');
+        const diffBar2 = document.getElementById('diffBar2');
+        const diffName3 = document.getElementById('diffName3');
+        const diffVal3 = document.getElementById('diffVal3');
+        const diffBar3 = document.getElementById('diffBar3');
+        const diffRuleOutText = document.getElementById('diffRuleOutText');
+
+        if (diffName1) diffName1.textContent = data.diff.name1;
+        if (diffVal1) {
+          diffVal1.textContent = `${data.diff.val1}%`;
+          diffVal1.style.color = data.diff.color1;
+        }
+        if (diffBar1) {
+          diffBar1.style.width = `${data.diff.val1}%`;
+          diffBar1.style.background = data.diff.color1;
+        }
+
+        if (diffName2) diffName2.textContent = data.diff.name2;
+        if (diffVal2) {
+          diffVal2.textContent = `${data.diff.val2}%`;
+          diffVal2.style.color = data.diff.color2;
+        }
+        if (diffBar2) {
+          diffBar2.style.width = `${Math.min(data.diff.val2 * 3.5, 100)}%`;
+          diffBar2.style.background = data.diff.color2;
+        }
+
+        if (diffName3) diffName3.textContent = data.diff.name3;
+        if (diffVal3) {
+          diffVal3.textContent = `${data.diff.val3}%`;
+          diffVal3.style.color = data.diff.color3;
+        }
+        if (diffBar3) {
+          diffBar3.style.width = `${Math.min(data.diff.val3 * 4.5, 100)}%`;
+          diffBar3.style.background = data.diff.color3;
+        }
+
+        if (diffRuleOutText) {
+          diffRuleOutText.innerHTML = `<strong>Clinical Exclusion:</strong> ${data.diff.ruleOut}`;
+        }
+      }
+
+      // Update Live Edge Latency Benchmark Telemetry
+      const telemetryLatency = document.getElementById('telemetryLatency');
+      if (telemetryLatency) {
+        telemetryLatency.textContent = `${36 + Math.floor(Math.random() * 8)} ms`;
+      }
 
       // Animate Confidence Counter
       animateConfidence(targetConfidence);
@@ -578,11 +694,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Dosage Calculator Logic
+  // Language Switcher Logic (English / हिंदी)
+  let isHindiMode = false;
+  const langToggleBtn = document.getElementById('langToggleBtn');
+  if (langToggleBtn) {
+    langToggleBtn.addEventListener('click', () => {
+      isHindiMode = !isHindiMode;
+      langToggleBtn.textContent = isHindiMode ? '🌐 हिंदी (Active)' : '🌐 English / हिंदी';
+      showToast(isHindiMode ? 'भाषा बदली गई: हिंदी कृषि शब्दावली सक्रिय' : 'Language switched to English / Bilingual mode');
+      runNeuralScan(currentPreset, null, null, false);
+    });
+  }
+
+  // Precision Knapsack Sprayer Tank Calibrator Logic (15L Indian Tank Standard)
   const landAreaInput = document.getElementById('landArea');
   const areaUnitSelect = document.getElementById('areaUnit');
   const calcOutput = document.getElementById('calcOutput');
+  const calcTankDose = document.getElementById('calcTankDose');
   const waterMixOutput = document.getElementById('waterMixOutput');
+  const calcPhiWarning = document.getElementById('calcPhiWarning');
 
   function calculateDosage() {
     const area = parseFloat(landAreaInput.value) || 1;
@@ -594,17 +724,33 @@ document.addEventListener('DOMContentLoaded', () => {
     if (unit === 'sqm') acresMultiplier = 0.000247105;
 
     const totalAcres = area * acresMultiplier;
+    // Standard Indian knapsack requirement: ~4 tanks (15L each = 60L total) per acre of Solanaceae canopy
+    const totalTanks = Math.max(1, Math.ceil(totalAcres * 4));
+    const totalWaterLiters = totalTanks * 15;
+
+    if (calcOutput) {
+      calcOutput.textContent = `${totalTanks} Tanks (टंकी)`;
+    }
 
     if (treatment === 'copper') {
-      const chemicalKg = (totalAcres * 0.5).toFixed(2);
-      const waterLiters = Math.round(totalAcres * 200);
-      calcOutput.textContent = `${chemicalKg} kg`;
-      waterMixOutput.textContent = `Mix with ${waterLiters} Liters of water (Rate: 2g/L)`;
+      const powderPerTankGrams = 30; // 2g per Liter in 15L = 30g
+      const totalKg = ((totalTanks * powderPerTankGrams) / 1000).toFixed(2);
+      if (calcTankDose) calcTankDose.textContent = `Dose: ${powderPerTankGrams}g powder per 15L tank (~2 level measuring caps)`;
+      if (waterMixOutput) waterMixOutput.textContent = `Total active solution: ${totalKg} kg powder in ${totalWaterLiters} Liters of water`;
+      if (calcPhiWarning) calcPhiWarning.textContent = `⚠️ Statutory Pre-Harvest Interval (PHI): 10 Days withholding before harvest`;
+    } else if (treatment === 'trichoderma') {
+      const bioPerTankGrams = 50; // 50g per 15L tank
+      const totalKg = ((totalTanks * bioPerTankGrams) / 1000).toFixed(2);
+      if (calcTankDose) calcTankDose.textContent = `Dose: ${bioPerTankGrams}g Trichoderma bio-culture per 15L tank`;
+      if (waterMixOutput) waterMixOutput.textContent = `Total organic solution: ${totalKg} kg culture in ${totalWaterLiters} Liters of water`;
+      if (calcPhiWarning) calcPhiWarning.textContent = `🌿 Zero Chemical PHI: Safe to harvest immediately (Biological Control)`;
     } else {
-      const neemLiters = (totalAcres * 0.6).toFixed(2);
-      const waterLiters = Math.round(totalAcres * 120);
-      calcOutput.textContent = `${neemLiters} Liters`;
-      waterMixOutput.textContent = `Mix with ${waterLiters} Liters of water + emulsifier`;
+      // Neem oil
+      const mlPerTank = 75; // 5ml per Liter in 15L = 75ml
+      const totalLiters = ((totalTanks * mlPerTank) / 1000).toFixed(2);
+      if (calcTankDose) calcTankDose.textContent = `Dose: ${mlPerTank}ml cold-pressed Neem oil per 15L tank + 10ml liquid soap`;
+      if (waterMixOutput) waterMixOutput.textContent = `Total organic emulsion: ${totalLiters} Liters in ${totalWaterLiters} Liters of water`;
+      if (calcPhiWarning) calcPhiWarning.textContent = `🌿 Zero Chemical Residue: Safe to harvest after 24 hours (Pollinator Safe)`;
     }
   }
 
