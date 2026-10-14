@@ -564,6 +564,43 @@ document.addEventListener('DOMContentLoaded', () => {
   // Re-Scan Trigger Button
   triggerScanBtn.addEventListener('click', () => runNeuralScan(currentPreset));
 
+  // Direct Camera Button
+  const cameraBtn = document.getElementById('cameraBtn');
+  if (cameraBtn) {
+    cameraBtn.addEventListener('click', () => {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.setAttribute('capture', 'environment');
+      input.onchange = (e) => {
+        if (e.target.files.length > 0) {
+          handleUploadedFile(e.target.files[0]);
+        }
+      };
+      input.click();
+    });
+  }
+
+  // Disease Directory Table Row Clicking
+  document.querySelectorAll('.directory-row').forEach(row => {
+    row.addEventListener('click', () => {
+      const presetKey = row.getAttribute('data-preset');
+      if (presetKey) {
+        document.querySelectorAll('.preset-chips .chip').forEach(c => {
+          c.classList.toggle('active', c.getAttribute('data-preset') === presetKey);
+        });
+        document.querySelectorAll('.directory-row').forEach(r => {
+          r.style.background = (r === row) ? 'rgba(16,185,129,0.12)' : '';
+        });
+        runNeuralScan(presetKey);
+        const scannerEl = document.getElementById('scannerCard');
+        if (scannerEl) {
+          scannerEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
   // Drag & Drop File Handling
   dropZone.addEventListener('dragover', (e) => {
     e.preventDefault();
@@ -587,6 +624,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
+    input.setAttribute('capture', 'environment');
     input.onchange = (e) => {
       if (e.target.files.length > 0) {
         handleUploadedFile(e.target.files[0]);

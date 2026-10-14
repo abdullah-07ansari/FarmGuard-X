@@ -126,7 +126,14 @@
         </h1>
         <p class="page-subtitle">Real-time multispectral foliage scan and plant pathology analysis (Offline Engine).</p>
       </div>
-      <div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button class="btn btn-outline" id="cameraBtn" title="Direct Camera Capture (कैमरा)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+            <circle cx="12" cy="13" r="4"></circle>
+          </svg>
+          Capture Leaf
+        </button>
         <button class="btn btn-primary" id="triggerScanBtn">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
@@ -333,7 +340,7 @@
               <span style="font-size: 0.74rem; color: var(--text-muted); font-family: var(--font-mono);">Softmax Top-3 Distribution</span>
             </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px;" id="diffProbBars">
+            <div class="diff-bars-grid" id="diffProbBars">
               <div class="diff-card">
                 <div class="diff-header">
                   <span class="diff-name" id="diffName1">P. infestans (Late Blight)</span>
@@ -576,7 +583,7 @@
     </div>
 
     <!-- Treatment Action Checklist & Spray Calculator Section -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px;" id="careChecklist">
+    <div class="two-col-grid" id="careChecklist">
       
       <!-- Interactive Checklist -->
       <div class="glass-card">
@@ -667,84 +674,86 @@
         <input type="text" id="searchDatabase" placeholder="Search by crop, disease, or pathogen..." style="background: var(--bg-surface); border: 1px solid var(--border-subtle); padding: 6px 12px; border-radius: 6px; color: #fff; font-size: 0.85rem; width: 260px;">
       </div>
 
-      <table style="width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.9rem;">
-        <thead>
-          <tr style="border-bottom: 1px solid var(--border-subtle); text-align: left; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">
-            <th style="padding: 10px;">Crop</th>
-            <th style="padding: 10px;">Disease Name</th>
-            <th style="padding: 10px;">Pathogen / Cause</th>
-            <th style="padding: 10px;">Key Symptoms</th>
-            <th style="padding: 10px;">Organic Solution</th>
-            <th style="padding: 10px;">Chemical Solution</th>
-          </tr>
-        </thead>
-        <tbody id="directoryTableBody">
-          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(16,185,129,0.05);">
-            <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
-            <td style="padding: 12px; font-weight: 700; color: var(--rose-danger);">Tomato Late Blight</td>
-            <td style="padding: 12px; font-style: italic;">Phytophthora infestans</td>
-            <td style="padding: 12px;">Water-soaked dark lesions, pale halo</td>
-            <td style="padding: 12px; color: var(--emerald-light);">Bordeaux mix (1%) / Trichoderma</td>
-            <td style="padding: 12px; color: var(--cyan-info);">Metalaxyl + Mancozeb WP</td>
-          </tr>
-          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
-            <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Tomato Early Blight</td>
-            <td style="padding: 12px; font-style: italic;">Alternaria solani</td>
-            <td style="padding: 12px;">Target concentric ring spots, chlorosis</td>
-            <td style="padding: 12px; color: var(--emerald-light);">Copper soap / Compost tea</td>
-            <td style="padding: 12px; color: var(--cyan-info);">Azoxystrobin 23% SC</td>
-          </tr>
-          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
-            <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Tomato Bacterial Spot</td>
-            <td style="padding: 12px; font-style: italic;">Xanthomonas perforans</td>
-            <td style="padding: 12px;">Small circular water-soaked lesions</td>
-            <td style="padding: 12px; color: var(--emerald-light);">Copper + Bacillus subtilis</td>
-            <td style="padding: 12px; color: var(--cyan-info);">Streptocycline + Copper Oxychloride</td>
-          </tr>
-          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
-            <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Tomato Yellow Leaf Curl (TYLCV)</td>
-            <td style="padding: 12px; font-style: italic;">Begomovirus (Whitefly vector)</td>
-            <td style="padding: 12px;">Upward leaf curling, stunted canopy</td>
-            <td style="padding: 12px; color: var(--emerald-light);">Yellow sticky traps + Neem oil</td>
-            <td style="padding: 12px; color: var(--cyan-info);">Imidacloprid 17.8% SL</td>
-          </tr>
-          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
-            <td style="padding: 12px; font-weight: 700; color: var(--emerald-light);">Healthy Tomato Foliage</td>
-            <td style="padding: 12px; font-style: italic;">None (Optimal canopy)</td>
-            <td style="padding: 12px;">Vibrant green foliage, zero spots</td>
-            <td style="padding: 12px; color: var(--emerald-light);">Seaweed kelp extract</td>
-            <td style="padding: 12px; color: var(--text-muted);">None needed</td>
-          </tr>
-          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <td style="padding: 12px; font-weight: 600; color: #fff;">🥔 Potato</td>
-            <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Potato Early Blight</td>
-            <td style="padding: 12px; font-style: italic;">Alternaria solani</td>
-            <td style="padding: 12px;">Brown-black concentric rings, yellow halos</td>
-            <td style="padding: 12px; color: var(--emerald-light);">Copper soap liquid spray</td>
-            <td style="padding: 12px; color: var(--cyan-info);">Difenoconazole / Mancozeb</td>
-          </tr>
-          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <td style="padding: 12px; font-weight: 600; color: #fff;">🥔 Potato</td>
-            <td style="padding: 12px; font-weight: 700; color: var(--rose-danger);">Potato Late Blight</td>
-            <td style="padding: 12px; font-style: italic;">Phytophthora infestans</td>
-            <td style="padding: 12px;">Dark purplish-brown lesions, stem rot</td>
-            <td style="padding: 12px; color: var(--emerald-light);">Bordeaux mixture (1%)</td>
-            <td style="padding: 12px; color: var(--cyan-info);">Metalaxyl 8% + Mancozeb 64%</td>
-          </tr>
-          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <td style="padding: 12px; font-weight: 600; color: #fff;">🥔 Potato</td>
-            <td style="padding: 12px; font-weight: 700; color: var(--emerald-light);">Healthy Potato Foliage</td>
-            <td style="padding: 12px; font-style: italic;">None (Optimal tuber bulking)</td>
-            <td style="padding: 12px;">Dark green healthy canopy, intact leaves</td>
-            <td style="padding: 12px; color: var(--emerald-light);">Straw mulch + Compost tea</td>
-            <td style="padding: 12px; color: var(--text-muted);">None needed</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table style="width: 100%; min-width: 680px; border-collapse: collapse; margin-top: 12px; font-size: 0.9rem;">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--border-subtle); text-align: left; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase;">
+              <th style="padding: 10px;">Crop</th>
+              <th style="padding: 10px;">Disease Name</th>
+              <th style="padding: 10px;">Pathogen / Cause</th>
+              <th style="padding: 10px;">Key Symptoms</th>
+              <th style="padding: 10px;">Organic Solution</th>
+              <th style="padding: 10px;">Chemical Solution</th>
+            </tr>
+          </thead>
+          <tbody id="directoryTableBody">
+            <tr class="directory-row" data-preset="tomato_late_blight" style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(16,185,129,0.05); cursor: pointer;" title="Click to test this disease in scanner">
+              <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
+              <td style="padding: 12px; font-weight: 700; color: var(--rose-danger);">Tomato Late Blight</td>
+              <td style="padding: 12px; font-style: italic;">Phytophthora infestans</td>
+              <td style="padding: 12px;">Water-soaked dark lesions, pale halo</td>
+              <td style="padding: 12px; color: var(--emerald-light);">Bordeaux mix (1%) / Trichoderma</td>
+              <td style="padding: 12px; color: var(--cyan-info);">Metalaxyl + Mancozeb WP</td>
+            </tr>
+            <tr class="directory-row" data-preset="tomato_early_blight" style="border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer;" title="Click to test this disease in scanner">
+              <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
+              <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Tomato Early Blight</td>
+              <td style="padding: 12px; font-style: italic;">Alternaria solani</td>
+              <td style="padding: 12px;">Target concentric ring spots, chlorosis</td>
+              <td style="padding: 12px; color: var(--emerald-light);">Copper soap / Compost tea</td>
+              <td style="padding: 12px; color: var(--cyan-info);">Azoxystrobin 23% SC</td>
+            </tr>
+            <tr class="directory-row" data-preset="tomato_bacterial_spot" style="border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer;" title="Click to test this disease in scanner">
+              <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
+              <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Tomato Bacterial Spot</td>
+              <td style="padding: 12px; font-style: italic;">Xanthomonas perforans</td>
+              <td style="padding: 12px;">Small circular water-soaked lesions</td>
+              <td style="padding: 12px; color: var(--emerald-light);">Copper + Bacillus subtilis</td>
+              <td style="padding: 12px; color: var(--cyan-info);">Streptocycline + Copper Oxychloride</td>
+            </tr>
+            <tr class="directory-row" data-preset="tomato_yellow_leaf_curl" style="border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer;" title="Click to test this disease in scanner">
+              <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
+              <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Tomato Yellow Leaf Curl (TYLCV)</td>
+              <td style="padding: 12px; font-style: italic;">Begomovirus (Whitefly vector)</td>
+              <td style="padding: 12px;">Upward leaf curling, stunted canopy</td>
+              <td style="padding: 12px; color: var(--emerald-light);">Yellow sticky traps + Neem oil</td>
+              <td style="padding: 12px; color: var(--cyan-info);">Imidacloprid 17.8% SL</td>
+            </tr>
+            <tr class="directory-row" data-preset="healthy_tomato" style="border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer;" title="Click to test this disease in scanner">
+              <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
+              <td style="padding: 12px; font-weight: 700; color: var(--emerald-light);">Healthy Tomato Foliage</td>
+              <td style="padding: 12px; font-style: italic;">None (Optimal canopy)</td>
+              <td style="padding: 12px;">Vibrant green foliage, zero spots</td>
+              <td style="padding: 12px; color: var(--emerald-light);">Seaweed kelp extract</td>
+              <td style="padding: 12px; color: var(--text-muted);">None needed</td>
+            </tr>
+            <tr class="directory-row" data-preset="potato_early_blight" style="border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer;" title="Click to test this disease in scanner">
+              <td style="padding: 12px; font-weight: 600; color: #fff;">🥔 Potato</td>
+              <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Potato Early Blight</td>
+              <td style="padding: 12px; font-style: italic;">Alternaria solani</td>
+              <td style="padding: 12px;">Brown-black concentric rings, yellow halos</td>
+              <td style="padding: 12px; color: var(--emerald-light);">Copper soap liquid spray</td>
+              <td style="padding: 12px; color: var(--cyan-info);">Difenoconazole / Mancozeb</td>
+            </tr>
+            <tr class="directory-row" data-preset="potato_late_blight" style="border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer;" title="Click to test this disease in scanner">
+              <td style="padding: 12px; font-weight: 600; color: #fff;">🥔 Potato</td>
+              <td style="padding: 12px; font-weight: 700; color: var(--rose-danger);">Potato Late Blight</td>
+              <td style="padding: 12px; font-style: italic;">Phytophthora infestans</td>
+              <td style="padding: 12px;">Dark purplish-brown lesions, stem rot</td>
+              <td style="padding: 12px; color: var(--emerald-light);">Bordeaux mixture (1%)</td>
+              <td style="padding: 12px; color: var(--cyan-info);">Metalaxyl 8% + Mancozeb 64%</td>
+            </tr>
+            <tr class="directory-row" data-preset="potato_healthy" style="border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer;" title="Click to test this disease in scanner">
+              <td style="padding: 12px; font-weight: 600; color: #fff;">🥔 Potato</td>
+              <td style="padding: 12px; font-weight: 700; color: var(--emerald-light);">Healthy Potato Foliage</td>
+              <td style="padding: 12px; font-style: italic;">None (Optimal tuber bulking)</td>
+              <td style="padding: 12px;">Dark green healthy canopy, intact leaves</td>
+              <td style="padding: 12px; color: var(--emerald-light);">Straw mulch + Compost tea</td>
+              <td style="padding: 12px; color: var(--text-muted);">None needed</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
   </main>
