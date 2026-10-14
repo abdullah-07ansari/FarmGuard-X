@@ -417,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const targetConfidence = customConfidence ? parseFloat(customConfidence) : data.confidence;
 
     scannerCard.classList.add('is-scanning');
-    showToast('⚡ Initializing Offline AI Scanning Engine (MobileNetV2 INT8 Spec)...');
+    showToast('🔬 Ingesting foliage specimen (MobileNetV2 INT8 Edge Engine)...');
 
     setTimeout(() => {
       // Update Preview Image & Bounding Box
@@ -598,7 +598,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function handleUploadedFile(file) {
     const reader = new FileReader();
     reader.onload = (event) => {
-      showToast('⚡ Ingesting custom image: 224x224 RGB conversion & pathology heuristic extraction...');
+      showToast('📸 Specimen loaded: Extracting 224x224 RGB pathology features...');
       
       const img = new Image();
       img.onload = () => {
