@@ -955,22 +955,77 @@ body {
   to { transform: translateX(0); opacity: 1; }
 }
 
-/* Print Styles */
+/* Print Styles - Professional Agronomic Diagnostic Certificate */
 @media print {
-  .app-sidebar, .header-controls, .btn, .preset-section, .toast-container {
+  .app-sidebar, 
+  .header-controls, 
+  .btn, 
+  .preset-section, 
+  .toast-container,
+  #logModal,
+  .brand-badge {
     display: none !important;
   }
+  
   body {
-    background: #fff;
-    color: #000;
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-size: 11pt;
   }
+
   .app-container {
-    display: block;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
+
+  .app-main {
+    padding: 0 !important;
+  }
+
   .glass-card {
-    border: 1px solid #ccc;
-    background: #fff;
-    color: #000;
-    box-shadow: none;
+    border: 1px solid #d1d5db !important;
+    background: #ffffff !important;
+    color: #111827 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 16px !important;
+  }
+
+  .diagnosis-hero {
+    border-left: 6px solid #b91c1c !important;
+  }
+
+  .hero-title, .card-title, h1, h2, h3 {
+    color: #111827 !important;
+  }
+
+  .metric-value, .calc-result-number {
+    color: #047857 !important;
+  }
+
+  .treatment-desc, .symptom-tag, p, span, div, td, th {
+    color: #1f2937 !important;
+  }
+
+  .treatment-box {
+    border: 1px solid #e5e7eb !important;
+    background: #f9fafb !important;
+  }
+
+  .bounding-box {
+    border: 2px dashed #b91c1c !important;
+    background: rgba(185, 28, 28, 0.08) !important;
+  }
+
+  .bounding-box-label {
+    background: #111827 !important;
+    color: #ffffff !important;
+  }
+
+  @page {
+    margin: 1.2cm;
+    size: A4 portrait;
   }
 }

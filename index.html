@@ -182,14 +182,26 @@
               <button class="chip active" data-preset="tomato_late_blight">
                 🍅 Tomato Late Blight
               </button>
-              <button class="chip" data-preset="healthy_tomato">
-                🌿 Healthy Tomato Leaf
+              <button class="chip" data-preset="tomato_early_blight">
+                🍅 Tomato Early Blight
               </button>
-              <button class="chip" data-preset="corn_rust">
-                🌽 Corn Common Rust
+              <button class="chip" data-preset="tomato_bacterial_spot">
+                🍅 Tomato Bacterial Spot
+              </button>
+              <button class="chip" data-preset="tomato_yellow_leaf_curl">
+                🍅 Tomato TYLCV (Yellow Leaf)
+              </button>
+              <button class="chip" data-preset="healthy_tomato">
+                🌿 Healthy Tomato
               </button>
               <button class="chip" data-preset="potato_early_blight">
                 🥔 Potato Early Blight
+              </button>
+              <button class="chip" data-preset="potato_late_blight">
+                🥔 Potato Late Blight
+              </button>
+              <button class="chip" data-preset="potato_healthy">
+                🌿 Healthy Potato
               </button>
             </div>
           </div>
@@ -401,6 +413,34 @@
               </div>
             </div>
 
+            <!-- Offline Diagnostic Inspection Log (LocalStorage Persisted) -->
+            <div style="margin-top: 20px; background: var(--bg-card); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);" id="inspectionLogCard">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span style="font-size: 0.88rem; font-weight: 700; color: var(--text-secondary);">🔬 Recent Diagnostic Field Scans</span>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <span style="font-size: 0.78rem; color: var(--emerald-light);" id="inspectionCount">3 Scans Synced</span>
+                  <button class="btn btn-outline" id="clearInspectionsBtn" style="padding: 2px 8px; font-size: 0.72rem;">Clear</button>
+                </div>
+              </div>
+              <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+                  <thead>
+                    <tr style="border-bottom: 1px solid var(--border-subtle); color: var(--text-muted); text-align: left;">
+                      <th style="padding: 6px;">Timestamp</th>
+                      <th style="padding: 6px;">Crop</th>
+                      <th style="padding: 6px;">Diagnosis</th>
+                      <th style="padding: 6px;">Confidence</th>
+                      <th style="padding: 6px;">Engine</th>
+                      <th style="padding: 6px; text-align: right;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="inspectionLogTableBody">
+                    <!-- Populated dynamically by app.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
             <!-- Field Spray History Log -->
             <div style="margin-top: 20px; background: var(--bg-card); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
@@ -580,33 +620,65 @@
             <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
             <td style="padding: 12px; font-weight: 700; color: var(--rose-danger);">Tomato Late Blight</td>
             <td style="padding: 12px; font-style: italic;">Phytophthora infestans</td>
-            <td style="padding: 12px;">Dark brown spots, Yellow leaf edges</td>
-            <td style="padding: 12px; color: var(--emerald-light);">Neem oil spray</td>
-            <td style="padding: 12px; color: var(--cyan-info);">Copper fungicide</td>
+            <td style="padding: 12px;">Water-soaked dark lesions, pale halo</td>
+            <td style="padding: 12px; color: var(--emerald-light);">Bordeaux mix (1%) / Trichoderma</td>
+            <td style="padding: 12px; color: var(--cyan-info);">Metalaxyl + Mancozeb WP</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
+            <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Tomato Early Blight</td>
+            <td style="padding: 12px; font-style: italic;">Alternaria solani</td>
+            <td style="padding: 12px;">Target concentric ring spots, chlorosis</td>
+            <td style="padding: 12px; color: var(--emerald-light);">Copper soap / Compost tea</td>
+            <td style="padding: 12px; color: var(--cyan-info);">Azoxystrobin 23% SC</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
+            <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Tomato Bacterial Spot</td>
+            <td style="padding: 12px; font-style: italic;">Xanthomonas perforans</td>
+            <td style="padding: 12px;">Small circular water-soaked lesions</td>
+            <td style="padding: 12px; color: var(--emerald-light);">Copper + Bacillus subtilis</td>
+            <td style="padding: 12px; color: var(--cyan-info);">Streptocycline + Copper Oxychloride</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
+            <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Tomato Yellow Leaf Curl (TYLCV)</td>
+            <td style="padding: 12px; font-style: italic;">Begomovirus (Whitefly vector)</td>
+            <td style="padding: 12px;">Upward leaf curling, stunted canopy</td>
+            <td style="padding: 12px; color: var(--emerald-light);">Yellow sticky traps + Neem oil</td>
+            <td style="padding: 12px; color: var(--cyan-info);">Imidacloprid 17.8% SL</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <td style="padding: 12px; font-weight: 600; color: #fff;">🍅 Tomato</td>
+            <td style="padding: 12px; font-weight: 700; color: var(--emerald-light);">Healthy Tomato Foliage</td>
+            <td style="padding: 12px; font-style: italic;">None (Optimal canopy)</td>
+            <td style="padding: 12px;">Vibrant green foliage, zero spots</td>
+            <td style="padding: 12px; color: var(--emerald-light);">Seaweed kelp extract</td>
+            <td style="padding: 12px; color: var(--text-muted);">None needed</td>
           </tr>
           <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
             <td style="padding: 12px; font-weight: 600; color: #fff;">🥔 Potato</td>
             <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Potato Early Blight</td>
             <td style="padding: 12px; font-style: italic;">Alternaria solani</td>
-            <td style="padding: 12px;">Concentric ring spots, lower leaf yellowing</td>
-            <td style="padding: 12px;">Compost tea spray</td>
-            <td style="padding: 12px;">Mancozeb 75% WP</td>
+            <td style="padding: 12px;">Brown-black concentric rings, yellow halos</td>
+            <td style="padding: 12px; color: var(--emerald-light);">Copper soap liquid spray</td>
+            <td style="padding: 12px; color: var(--cyan-info);">Difenoconazole / Mancozeb</td>
           </tr>
           <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <td style="padding: 12px; font-weight: 600; color: #fff;">🌽 Corn</td>
-            <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Corn Common Rust</td>
-            <td style="padding: 12px; font-style: italic;">Puccinia sorghi</td>
-            <td style="padding: 12px;">Reddish-brown pustules on leaves</td>
-            <td style="padding: 12px;">Sulfur dust</td>
-            <td style="padding: 12px;">Azoxystrobin</td>
+            <td style="padding: 12px; font-weight: 600; color: #fff;">🥔 Potato</td>
+            <td style="padding: 12px; font-weight: 700; color: var(--rose-danger);">Potato Late Blight</td>
+            <td style="padding: 12px; font-style: italic;">Phytophthora infestans</td>
+            <td style="padding: 12px;">Dark purplish-brown lesions, stem rot</td>
+            <td style="padding: 12px; color: var(--emerald-light);">Bordeaux mixture (1%)</td>
+            <td style="padding: 12px; color: var(--cyan-info);">Metalaxyl 8% + Mancozeb 64%</td>
           </tr>
           <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <td style="padding: 12px; font-weight: 600; color: #fff;">🍎 Apple</td>
-            <td style="padding: 12px; font-weight: 700; color: var(--amber-warning);">Apple Scab</td>
-            <td style="padding: 12px; font-style: italic;">Venturia inaequalis</td>
-            <td style="padding: 12px;">Olive-green velvet leaf lesions</td>
-            <td style="padding: 12px;">Potassium bicarbonate</td>
-            <td style="padding: 12px;">Captan fungicide</td>
+            <td style="padding: 12px; font-weight: 600; color: #fff;">🥔 Potato</td>
+            <td style="padding: 12px; font-weight: 700; color: var(--emerald-light);">Healthy Potato Foliage</td>
+            <td style="padding: 12px; font-style: italic;">None (Optimal tuber bulking)</td>
+            <td style="padding: 12px;">Dark green healthy canopy, intact leaves</td>
+            <td style="padding: 12px; color: var(--emerald-light);">Straw mulch + Compost tea</td>
+            <td style="padding: 12px; color: var(--text-muted);">None needed</td>
           </tr>
         </tbody>
       </table>

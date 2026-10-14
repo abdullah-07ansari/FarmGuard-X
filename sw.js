@@ -1,6 +1,6 @@
 // FarmGuard X - Service Worker (Offline Cache Engine)
 
-const CACHE_NAME = 'farmguard-x-offline-v1';
+const CACHE_NAME = 'farmguard-x-offline-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -8,7 +8,13 @@ const ASSETS_TO_CACHE = [
   './app.js',
   './manifest.json',
   './assets/tomato_late_blight.jpg',
-  './assets/healthy_tomato.jpg'
+  './assets/healthy_tomato.jpg',
+  './assets/tomato_early_blight.jpg',
+  './assets/tomato_bacterial_spot.jpg',
+  './assets/tomato_yellow_leaf_curl.jpg',
+  './assets/potato_early_blight.jpg',
+  './assets/potato_late_blight.jpg',
+  './assets/potato_healthy.jpg'
 ];
 
 // Service Worker Installation
