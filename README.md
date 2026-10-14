@@ -140,10 +140,11 @@ python farmguard_ai/scripts/02_train_model.py --config farmguard_ai/configs/mobi
 `POST /api/v1/predict` (Multipart form-data with image `file`)
 Returns pathological condition, confidence percentage, latency, and comprehensive dual-track treatment plans (organic vs chemical) from [`recommendations.json`](backend/app/data/recommendations.json).
 
----
+## 📖 Complete Engineering & Architectural Documentation
 
-## 📖 Extended Documentation
-
+* 📄 **Product Requirements Document (PRD)**: [`docs/PRD.md`](docs/PRD.md)
+* 🏛️ **High-Level Design (HLD)**: [`docs/HLD.md`](docs/HLD.md)
 * 📐 **Low-Level Design (LLD)**: [`docs/LOW_LEVEL_DESIGN.md`](docs/LOW_LEVEL_DESIGN.md)
-* 🤖 **LLM Handoff Guide**: [`docs/PROJECT_STATE_FOR_LLM.md`](docs/PROJECT_STATE_FOR_LLM.md)
-* 📋 **Project Overview**: [`docs/project-overview.md`](docs/project-overview.md)
+* 📋 **Software Requirements Specification (SRS)**: [`docs/SRS.md`](docs/SRS.md)
+* 🤖 **LLM Handoff & State Guide**: [`docs/PROJECT_STATE_FOR_LLM.md`](docs/PROJECT_STATE_FOR_LLM.md)
+* 🌿 **Project Overview**: [`docs/project-overview.md`](docs/project-overview.md)
