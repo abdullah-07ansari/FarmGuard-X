@@ -41,3 +41,6 @@ backend/uploads/*
 farmguard_ai/data/03_splits/*
 !farmguard_ai/data/03_splits/
 !farmguard_ai/data/03_splits/split_manifest.csv
+
+# Temporary graphify output
+graphify-out/
